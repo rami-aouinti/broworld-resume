@@ -6,6 +6,8 @@
     >
       <AppNotification />
       <AppSettings />
+      <AppDemo></AppDemo>
+      <AppPublish></AppPublish>
     </v-defaults-provider>
   </v-footer>
 </template>
@@ -20,3 +22,7 @@
   }
 }
 </style>
+<script setup lang="ts">
+import AppDemo from "~/components/App/AppDemo.vue";
+import AppPublish from "~/components/App/AppPublish.vue";
+</script>

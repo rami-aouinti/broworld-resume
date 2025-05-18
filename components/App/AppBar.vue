@@ -21,15 +21,45 @@ const isDark = computed({
     theme.global.name.value = v ? 'dark' : 'light'
   },
 })
+
+function back() {
+  window.history.back()
+}
+function refresh() {
+  window.location.reload()
+}
+const canGoBack = ref(false)
+const router = useRouter()
+router.afterEach(() => {
+  // @ts-expect-error Experimental https://developer.mozilla.org/en-US/docs/Web/API/Navigation
+  canGoBack.value = window.navigation.canGoBack
+})
+const { isFullscreen, toggle: toggleFullscreen } = useFullscreen()
+
 const { loggedIn, clear, user } = useUserSession()
 </script>
 
 <template>
   <v-app-bar flat>
     <v-app-bar-nav-icon @click="drawer = !drawer" />
-    <v-breadcrumbs :items="breadcrumbs" />
+    <div class="d-none d-sm-flex align-center">
+      <v-btn
+        v-tooltip="{ text: 'Go Back' }"
+        :disabled="!canGoBack"
+        icon="ph:arrow-left"
+        @click="back()"
+      />
+      <v-btn icon="ph:arrow-clockwise" @click="refresh()" />
+      <v-breadcrumbs :items="breadcrumbs" />
+    </div>
     <v-spacer />
     <div id="app-bar" />
+    <v-btn
+      v-tooltip="`${isFullscreen ? 'Minimize' : 'Maximize'}`"
+      style="height: 31px; padding-top: 1px"
+      :icon="isFullscreen ? 'ph:corners-in' : 'ph:corners-out'"
+      @click="toggleFullscreen()"
+    />
     <v-switch
       v-model="isDark"
       color=""

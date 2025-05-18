@@ -2,6 +2,7 @@ import type { IconProps } from 'vuetify'
 import { Icon } from '#components'
 import { useStorage } from '@vueuse/core'
 import { aliases } from 'vuetify/iconsets/mdi'
+import '@/assets/styles/material-dashboard.scss'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('vuetify:configuration', ({ vuetifyOptions }) => {
@@ -15,7 +16,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       },
       aliases,
     }
-    const primary = useStorage('theme-primary', '#1697f6').value
+    const primary = useStorage('theme-primary', '#091b2d').value
     vuetifyOptions.theme = {
       themes: {
         light: { colors: { primary } },

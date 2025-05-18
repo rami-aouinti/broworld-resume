@@ -12,7 +12,20 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/eslint',
     '@nuxt/test-utils/module',
+    '@nuxtjs/tailwindcss'
   ],
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: [
+        '/', '/dashboard',
+      ],
+      ignore: ['/resume', '/1']
+    }
+  },
+  build: {
+    transpile: ["@headlessui/vue"],
+  },
   css: ['~/assets/styles/index.css'],
   experimental: { typedPages: true },
   typescript: { shim: false, strict: true },
